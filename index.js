@@ -15,7 +15,8 @@ const pool = new Pool({
 app.use(express.json());
 
 app.use(cors({
-  origin: '*'
+  origin: '*',
+  methods: ['GET', 'POST']
 }))
 
 app.listen(port, () => {
