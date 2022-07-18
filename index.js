@@ -2,6 +2,7 @@ const express = require('express');
 const port = process.env.PORT || 8080;
 const app = express();
 const Pool = require('pg').Pool;
+const cors = require('cors');
 
 const pool = new Pool({
   user: 'drugman',
@@ -12,6 +13,10 @@ const pool = new Pool({
 });
 
 app.use(express.json());
+
+app.use(cors({
+  origin: '*'
+}))
 
 app.listen(port, () => {
   console.log(`API Running on port ${port}`);

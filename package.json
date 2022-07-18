@@ -24,6 +24,7 @@
   },
   "homepage": "https://github.com/SebastianVeraB/pharma-API#readme",
   "dependencies": {
+    "cors": "^2.8.5",
     "express": "^4.18.1",
     "pg": "^8.7.3",
     "serve": "^14.0.1"
