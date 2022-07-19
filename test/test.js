@@ -16,9 +16,8 @@ describe("GET /", () => {
 describe("GET /", () => {
     it("connects and query Quinapril!", (done) => {
         request(apptest).get("/api/query/generic/Quinapril").set("accept", "application/json").expect(function (res) {
-            console.log(res.text.length)
-            res.text.length.should.be.above(0);
-        })
-        .end(done);
+            
+            res.text.length;
+        }).to.be.above(0).end(done);
     });
 });
