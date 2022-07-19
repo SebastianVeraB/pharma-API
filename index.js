@@ -51,7 +51,8 @@ app.get('/api/query/product/:ndc_product_code', (req, res) => {
 
 app.get('/api/query/generic/:generic_name', (req, res) => {
   const generic_name = req.params.generic_name;
-  pool.query("SELECT generic_name, product_name, ndc_product_code form FROM public.product WHERE generic_name = $1", [generic_name], (error, results) => {
+
+  pool.query("SELECT generic_name, product_name, ndc_product_code form FROM public.product WHERE generic_name like '\%${generic_name}\%'", [generic_name], (error, results) => {
       res.status(200).json(results.rows);
     });
 });
