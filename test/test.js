@@ -13,7 +13,7 @@ describe("GET /", () => {
 describe("DB Calls", function () {
     describe("GET /", function () {
       it("should return 200 OK with several generic drugs", async function () {
-        const response = await request(app)
+        const response = await request(apptest)
           .get("/api/query/generic/Quinapril")
           .expect(200)
           .expect("Content-Type", /json/);
