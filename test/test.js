@@ -1,4 +1,7 @@
 const request = require("supertest");
+const chai = require("chai");
+const expect = chai.expect;
+const { response } = require("../index");
 const apptest = require("../index");
 
 describe("GET /", () => {
@@ -6,8 +9,18 @@ describe("GET /", () => {
         request(apptest).get("/api/").expect('[{"name":"Neurontin","lab":"Pfizer","active_ingredient":"Gabapentin","strength":"300","Form":"Capsules"}]', done);
     })
 });
-describe("GET /", () => {
-    it("connects and query DB!", (done) => {
-        request(apptest).get("/api/query/product/65483-991").expect('[{"generic_name":"allopurinol","product_name":"ZYLOPRIM","form":"TABLET"}]', done);
-    })
-});
+
+describe("DB Calls", function () {
+    describe("GET /", function () {
+      it("should return 200 OK with several generic drugs", async function () {
+        const response = await request(apptest)
+          .get("/api/query/generic/Quinapril")
+          .expect(200)
+          .expect("Content-Type", /json/);
+  
+        const drugs = response.body;
+        expect(drugs).to.be.an("array");
+        expect(drugs).length.to.be.greaterThan(0);
+      });
+    });
+  });
