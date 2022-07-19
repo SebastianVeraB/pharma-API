@@ -15,9 +15,9 @@ describe("GET /", () => {
 
 describe("GET /", () => {
     it("connects and query Quinapril!", (done) => {
-        request(apptest).get("/api/query/generic/Quinapril").expect((function (res) {
+        request(apptest).get("/api/query/generic/Quinapril").expect(function (res) {
             console.log(res);
-            res.body.items.length.should.be.above(0);
-          }), done);
+            res.body.items.length.should.be.above(0).end(done);
+          });
     })
 });
