@@ -52,8 +52,7 @@ app.get('/api/query/product/:ndc_product_code', (req, res) => {
 app.get('/api/query/generic/:generic_name', (req, res) => {
   const generic_name = req.params.generic_name;
 
-  pool.query(`
-  SELECT product.product_name, product.generic_name, lab.assigned_entity, active_ingredient.quantity, active_ingredient.unit
+  pool.query(`SELECT product.product_name, product.generic_name, lab.assigned_entity, active_ingredient.quantity, active_ingredient.unit
   FROM public.product AS product
   INNER JOIN public.prd2label AS plabel on plabel.ndc_product_code = product.ndc_product_code 
   INNER JOIN public.label AS lab AS lab.id = plabel.label_id
