@@ -52,11 +52,12 @@ app.get('/api/query/product/:ndc_product_code', (req, res) => {
 app.get('/api/query/generic/:generic_name', (req, res) => {
   const generic_name = req.params.generic_name;
 
-  pool.query(`SELECT product.product_name, product.generic_name, product.form, product.ndc_product_code, lab.assigned_entity, active_ingredient.quantity, active_ingredient.unit
+  pool.query(`SELECT product.product_name, product.generic_name, product.form, product.ndc_product_code, struct.mrdef, lab.assigned_entity, active_ingredient.quantity, active_ingredient.unit
   FROM public.product AS product
   INNER JOIN public.prd2label AS plabel ON plabel.ndc_product_code = product.ndc_product_code 
   INNER JOIN public.label AS lab ON lab.id = plabel.label_id
   INNER JOIN public.active_ingredient AS active_ingredient ON active_ingredient.ndc_product_code = product.ndc_product_code
+  INNER JOIN public.structures AS struct ON struct.id = active_ingredient.struct_id
   WHERE generic_name like '%'||$1||'%'
   ORDER BY lab.assigned_entity ASC`, [generic_name], (error, results) => {
       res.set({'Content-Type':'application/json'}).status(200).json(results.rows);
