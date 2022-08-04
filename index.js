@@ -50,7 +50,7 @@ app.get('/api/query/generic/:generic_name', (req, res) => {
   INNER JOIN public.label AS lab ON lab.id = plabel.label_id
   INNER JOIN public.active_ingredient AS active_ingredient ON active_ingredient.ndc_product_code = product.ndc_product_code
   INNER JOIN public.structures AS struct ON struct.id = active_ingredient.struct_id
-  WHERE generic_name like '%'||$1||'%'
+  WHERE generic_name ILIKE '%'||$1||'%'
   ORDER BY lab.assigned_entity ASC`, [generic_name], (error, results) => {
       res.set({'Content-Type':'application/json'}).status(200).json(results.rows);
     });
