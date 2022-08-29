@@ -35,7 +35,7 @@ describe("DB Get Generics", function () {
   
         const drugs = response.body;
         expect(drugs).to.be.an("array");
-        expect(drugs).length.to.be.greaterThan(0);
+        expect(drugs).length.to.be.greaterThan(1000000);
       });
     });
   });
